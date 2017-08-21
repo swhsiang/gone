@@ -1,8 +1,10 @@
 package server
 
 import (
+	"errors"
 	"fmt"
 	"net"
+	"regexp"
 	"strings"
 	"time"
 
@@ -23,6 +25,32 @@ type Server struct {
 // NewServer return an instance
 func NewServer(host, port string) Server {
 	return Server{Host: host, Port: port}
+}
+
+type Message struct {
+	Command string
+	// FIXME ignore STATS command first
+	Key string
+	// FIXME Support string type first
+	Value     string
+	ValueType string
+}
+
+var re = regexp.MustCompile(`(PUT|GET|DELETE)\;(\w+)\;(.*)\;(string|int|array)?$`)
+
+func parseMessage(message string) (*Message, error) {
+
+	res := re.FindAllStringSubmatch(message, -1)[0]
+	if len(res) != 5 {
+		return nil, errors.New("The message is invalid")
+	}
+	m := &Message{
+		Command:   res[1],
+		Key:       res[2],
+		Value:     res[3],
+		ValueType: res[4],
+	}
+	return m, nil
 }
 
 // Run start server

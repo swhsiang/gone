@@ -52,7 +52,6 @@ func TestNewServer(t *testing.T) {
 
 			res, err := ioutil.ReadAll(connection)
 			checkErr(err, t)
-			fmt.Println(string(res[:]))
 
 			connection.Close()
 			ShouldEqual(string(res[:]), expectString)
@@ -65,4 +64,38 @@ func checkErr(err error, t *testing.T) {
 		t.Errorf("err should be nil: %s", err.Error())
 		t.Fail()
 	}
+}
+func TestCommandParser(t *testing.T) {
+	Convey("Parse message", t, func() {
+		type testData struct {
+			Input  string
+			Expect Message
+		}
+		testDataSet := []testData{
+			testData{
+				Input: "PUT;dream;I will be a millionare;string",
+				Expect: Message{
+					Command:   "PUT",
+					Key:       "dream",
+					Value:     "I will be a millionare",
+					ValueType: "string",
+				},
+			},
+			testData{
+				Input: "GET;dream;;",
+				Expect: Message{
+					Command:   "GET",
+					Key:       "dream",
+					Value:     "",
+					ValueType: "",
+				},
+			},
+		}
+
+		for _, test := range testDataSet {
+			m, err := parseMessage(test.Input)
+			ShouldBeNil(err)
+			ShouldEqual(*m, test.Expect)
+		}
+	})
 }
