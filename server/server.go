@@ -11,12 +11,12 @@ import (
 	"github.com/swhsiang/gone/log"
 )
 
-// Storage
+// Storage store data
 type Storage struct {
 	data map[string]interface{}
 }
 
-// Server
+// Server define server's property
 type Server struct {
 	Host string
 	Port string
@@ -27,6 +27,7 @@ func NewServer(host, port string) Server {
 	return Server{Host: host, Port: port}
 }
 
+// Message define Message's property
 type Message struct {
 	Command string
 	// FIXME ignore STATS command first
@@ -79,6 +80,7 @@ func (s *Server) Run() {
 
 		buf := make([]byte, 4*1024)
 		for {
+
 			n, err := connection.Read(buf)
 			if err != nil || n == 0 {
 				break

@@ -10,6 +10,13 @@ import (
 )
 
 func TestNewServer(t *testing.T) {
+	Convey("Should get an instance of Server struct", t, func() {
+		s := NewServer("google.com", "80")
+		So(s, ShouldResemble, Server{Host: "google.com", Port: "80"})
+	})
+}
+
+func TestRun(t *testing.T) {
 	Convey("Start server", t, func() {
 		Convey("Test connection", func() {
 			host := "localhost"
@@ -26,7 +33,7 @@ func TestNewServer(t *testing.T) {
 				t.Fail()
 			}
 			connection, err := net.DialTCP("tcp", nil, tcpAddress)
-			ShouldBeNil(nil)
+			So(err, ShouldBeNil)
 			connection.Close()
 
 		})
@@ -54,7 +61,9 @@ func TestNewServer(t *testing.T) {
 			checkErr(err, t)
 
 			connection.Close()
-			ShouldEqual(string(res[:]), expectString)
+
+			So(string(res[:]), ShouldEqual, expectString)
+
 		})
 	})
 }
@@ -94,8 +103,8 @@ func TestCommandParser(t *testing.T) {
 
 		for _, test := range testDataSet {
 			m, err := parseMessage(test.Input)
-			ShouldBeNil(err)
-			ShouldEqual(*m, test.Expect)
+			So(err, ShouldBeNil)
+			So(*m, ShouldResemble, test.Expect)
 		}
 	})
 }
