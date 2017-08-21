@@ -1,0 +1,4 @@
+package: github.com/swhsiang/gone
+import:
+- package: github.com/spf13/viper
+- package: github.com/Sirupsen/logrus
