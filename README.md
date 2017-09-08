@@ -1,6 +1,8 @@
 # gone
 
-A NoSQL database written in Go
+[![Build Status](https://travis-ci.org/swhsiang/gone.svg?branch=master)](https://travis-ci.org/swhsiang/gone)
+
+A in-memory NoSQL database written in Go
 
 ## Getting started
 
