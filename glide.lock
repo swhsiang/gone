@@ -1,5 +1,5 @@
-hash: 0516711e59db2344a2d369e7b59fd0cedf5896efe83bb2f9ff21e5348c0517c2
-updated: 2017-08-20T22:36:48.528077625-07:00
+hash: 0e90b86fbabd8f4eb0f8085e55a0d08d7df6a1c040d357731508d2aae5994f43
+updated: 2017-09-08T12:27:30.882934242+08:00
 imports:
 - name: github.com/fsnotify/fsnotify
   version: a904159b9206978bb6d53fcc7a769e5cd726c737
@@ -24,6 +24,12 @@ imports:
   version: c9506ee96398e7571356462217b9e24d6a628d71
 - name: github.com/Sirupsen/logrus
   version: 68806b4b77355d6c8577a2c8bbc6d547a5272491
+- name: github.com/smartystreets/goconvey
+  version: 9e8dc3f972df6c8fcc0375ef492c24d0bb204857
+  subpackages:
+  - convey
+  - convey/gotest
+  - convey/reporting
 - name: github.com/spf13/afero
   version: 72b31426848c6ef12a7a8e216708cb0d1530f074
   subpackages:
@@ -51,4 +57,15 @@ imports:
   - unicode/norm
 - name: gopkg.in/yaml.v2
   version: 53feefa2559fb8dfa8d81baad31be332c97d6c77
-testImports: []
+testImports:
+- name: github.com/gopherjs/gopherjs
+  version: b40cd48c38f9a18eb3db20d163bad78de12cf0b7
+  subpackages:
+  - js
+- name: github.com/jtolds/gls
+  version: 77f18212c9c7edc9bd6a33d383a7b545ce62f064
+- name: github.com/smartystreets/assertions
+  version: 9c0ea8acbc1d8ad689f9e6fe0c1fa5838e0cabc2
+  subpackages:
+  - internal/go-render/render
+  - internal/oglematchers
